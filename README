@@ -1,0 +1,16 @@
+The Alias modules the ability to give aliases to long classnames for
+display purposes ONLY. For example, I display `dirty-owl-hackers' as
+`d-o-h'.
+
+To use Alias, copy Alias.par into ~/.owl/modules, and create a
+~/.owl/classmap file listing the (class, alias) pairs you want,
+separated by whitespace. For example, my classmap file contains
+
+
+--- CUT HERE ---
+dirty-owl-hackers               d-o-h
+--- END CUT ---
+
+Then, from BarnOwl, execute the :reload-modules command.
+
+
