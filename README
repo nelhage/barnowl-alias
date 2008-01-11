@@ -14,3 +14,7 @@ dirty-owl-hackers               d-o-h
 Then, from BarnOwl, execute the :reload-modules command.
 
 
+Technical note: Alias assumes that you are using a ``new-style'' style
+which uses the ``context'' field of the Message object for
+display. Old styles which display $m->class of a zephyr directly will
+not be affected by the display map.
