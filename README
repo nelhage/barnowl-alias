@@ -1,6 +1,6 @@
-The Alias modules the ability to give aliases to long classnames for
-display purposes ONLY. For example, I display `dirty-owl-hackers' as
-`d-o-h'.
+The Alias modules provides the ability to give aliases to long
+classnames for display purposes ONLY. For example, I display
+`dirty-owl-hackers' as `d-o-h'.
 
 To use Alias, copy Alias.par into ~/.owl/modules, and create a
 ~/.owl/classmap file listing the (class, alias) pairs you want,
