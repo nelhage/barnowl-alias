@@ -19,9 +19,9 @@ my %aliases;
 my $cfg = BarnOwl::get_config_dir();
 if(-r "$cfg/classmap") {
     open(my $fh, "<", "$cfg/classmap");
-    while(my $line = <$fh>) {
-        next if /^\s+#/;
-        next if /^\s+$/;
+    while(defined(my $line = <$fh>)) {
+        next if $line =~ /^\s+#/;
+        next if $line =~ /^\s+$/;
         my ($class, $alias) = split(/\s+/, $line);
         $aliases{$class} = $alias;
     }
