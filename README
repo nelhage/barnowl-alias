@@ -11,7 +11,8 @@ separated by whitespace. For example, my classmap file contains
 dirty-owl-hackers               d-o-h
 --- END CUT ---
 
-Then, from BarnOwl, execute the :reload-modules command.
+Then, from BarnOwl, execute the ':reload-module Alias' command.
+You may need to press 'o' twice to redraw existing messages.
 
 
 Technical note: Alias assumes that you are using a ``new-style'' style
