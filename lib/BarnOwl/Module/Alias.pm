@@ -23,7 +23,7 @@ if(-r "$cfg/classmap") {
         next if $line =~ /^\s+#/;
         next if $line =~ /^\s+$/;
         my ($class, $alias) = split(/\s+/, $line);
-        $aliases{$class} = $alias;
+        $aliases{lc($class)} = $alias;
     }
     close($fh);
 }
@@ -34,7 +34,7 @@ if(-r "$cfg/classmap") {
         my $self = shift;
         my $class = $self->class;
         my ($un, $baseclass, $d) = $class =~ /^((?:un)*)(.+?)((?:[.]d)*)$/;
-        $baseclass = $aliases{$baseclass} || $baseclass;
+        $baseclass = $aliases{lc($baseclass)} || $baseclass;
         return "$un$baseclass$d";
     }
 }
