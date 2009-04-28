@@ -33,7 +33,7 @@ if(-r "$cfg/classmap") {
     sub BarnOwl::Message::Zephyr::context {
         my $self = shift;
         my $class = $self->class;
-        my ($un, $baseclass, $d) = $class =~ /^((?:un)*)(.+?)((?:[.]d)*)$/;
+        my ($un, $baseclass, $d) = $class =~ /^((?:un)*)(.+?)((?:[.]d)*)$/i;
         $baseclass = $aliases{lc($baseclass)} || $baseclass;
         return "$un$baseclass$d";
     }
