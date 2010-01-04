@@ -20,7 +20,7 @@ my %aliases;
 
 my $cfg = BarnOwl::get_config_dir();
 if(-r "$cfg/classmap") {
-    open(my $fh, "<", "$cfg/classmap") or die("Unable to read $cfg/classmap:$!\n");
+    open(my $fh, "<:encoding(UTF-8)", "$cfg/classmap") or die("Unable to read $cfg/classmap:$!\n");
     while(defined(my $line = <$fh>)) {
         next if $line =~ /^\s+#/;
         next if $line =~ /^\s+$/;
