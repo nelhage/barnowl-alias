@@ -14,7 +14,7 @@ long class names as shorter ones. Currently zephyr-only.
 
 package BarnOwl::Module::Alias;
 
-our $VERSION = 0.1;
+our $VERSION = 0.2;
 
 my %aliases;
 
