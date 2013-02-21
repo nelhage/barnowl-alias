@@ -18,6 +18,11 @@ our $VERSION = 0.2;
 
 my %aliases;
 
+sub splitclass {
+    my ($match, $class) = @_;
+    return $class =~ /^((?:un)*)$match((?:[.]d)*)$/i;
+}
+
 my $cfg = BarnOwl::get_config_dir();
 if(-r "$cfg/classmap") {
     open(my $fh, "<:encoding(UTF-8)", "$cfg/classmap") or die("Unable to read $cfg/classmap:$!\n");
@@ -25,7 +30,8 @@ if(-r "$cfg/classmap") {
         next if $line =~ /^\s+#/;
         next if $line =~ /^\s+$/;
         my ($class, $alias) = split(/\s+/, $line);
-        $aliases{lc($class)} = $alias;
+        my ($un, $baseclass, $d) = splitclass(qr/(.+?)/, $class);
+        unshift @{$aliases{lc($baseclass)}}, [$class, $alias];
     }
     close($fh);
 }
@@ -35,9 +41,15 @@ if(-r "$cfg/classmap") {
     sub BarnOwl::Message::Zephyr::context {
         my $self = shift;
         my $class = $self->class;
-        my ($un, $baseclass, $d) = $class =~ /^((?:un)*)(.+?)((?:[.]d)*)$/i;
-        $baseclass = $aliases{lc($baseclass)} || $baseclass;
-        return "$un$baseclass$d";
+        my ($un, $baseclass, $d) = splitclass(qr/(.+?)/, $class);
+        exists $aliases{lc($baseclass)} or return $class;
+        for my $i (@{$aliases{lc($baseclass)}}) {
+            my ($aclass, $aalias) = @$i;
+            if (my ($un, $d) = splitclass(qr/\Q$aclass\E/i, $class)) {
+                return "$un$aalias$d";
+            }
+        }
+        return $class;
     }
 }
 
